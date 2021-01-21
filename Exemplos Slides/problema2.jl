@@ -25,7 +25,7 @@ model = Model(Cbc.Optimizer)
 @objective(model, Max, 30ligaTipoA + 50ligaTipoB)
 @constraint(model, 2ligaTipoA + 1ligaTipoB <= 16)
 @constraint(model, 1ligaTipoA + 2ligaTipoB <= 11)
-@constraint(model, 2ligaTipoA + 3ligaTipoB <= 15)
+@constraint(model, 1ligaTipoA + 3ligaTipoB <= 15)
 
 optimize!(model)
 
