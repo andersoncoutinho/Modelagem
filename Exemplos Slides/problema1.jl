@@ -18,6 +18,9 @@ model = Model(Cbc.Optimizer)
 @variable(model, 0 <= tangerinas <= 200)
 @objective(model, Max, 20laranjas + 10pessegos + 30tangerinas)
 @constraint(model, laranjas + pessegos + tangerinas <= 800)
+@constraint(model, laranjas in MOI.Integer())
+@constraint(model, pessegos in MOI.Integer())
+@constraint(model, tangerinas in MOI.Integer())
 
 optimize!(model)
 

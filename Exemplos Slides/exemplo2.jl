@@ -21,6 +21,8 @@ model = Model(Cbc.Optimizer)
 @objective(model, Min, 3carne + 2.5ovo)
 @constraint(model, 4carne + 8ovo >= 32)
 @constraint(model, 6carne + 6ovo >= 36)
+@constraint(model, carne in MOI.Integer())
+@constraint(model, ovo in MOI.Integer())
 
 optimize!(model)
 

@@ -18,6 +18,8 @@ model = Model(GLPK.Optimizer)
 @variable(model, 0 <= x2 <= 30)
 @objective(model, Max, 1000x1 +1800x2)
 @constraint(model, 20x1 + 30x2 <= 1200)
+@constraint(model, x1 in MOI.Integer())
+@constraint(model, x2 in MOI.Integer())
 
 println(model)
 

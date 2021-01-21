@@ -26,6 +26,8 @@ model = Model(Cbc.Optimizer)
 @constraint(model, 2ligaTipoA + 1ligaTipoB <= 16)
 @constraint(model, 1ligaTipoA + 2ligaTipoB <= 11)
 @constraint(model, 1ligaTipoA + 3ligaTipoB <= 15)
+@constraint(model, ligaTipoA in MOI.Integer())
+@constraint(model, ligaTipoB in MOI.Integer())
 
 optimize!(model)
 
