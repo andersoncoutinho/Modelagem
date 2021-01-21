@@ -12,9 +12,9 @@ Cada unidade de carne custa R$3,00 e cada unidade de ovo custa R$2,50.
 ################################################################################################# =#
 
 using  JuMP
-import GLPK
+import Cbc
 
-model = Model(GLPK.Optimizer)
+model = Model(Cbc.Optimizer)
 
 @variable(model, carne >= 0)
 @variable(model, ovo >= 0)
@@ -22,13 +22,13 @@ model = Model(GLPK.Optimizer)
 @constraint(model, 4carne + 8ovo >= 32)
 @constraint(model, 6carne + 6ovo >= 36)
 
-println(model)
-
 optimize!(model)
 
 precoMinimo = objective_value(model)
 qtdCarne = value(carne)
 qtdOvo = value(ovo)
+
+println(model)
 
 println("Valor Mínimo: R\$: ", precoMinimo)
 println("Quantidade de carne: ", qtdCarne)
