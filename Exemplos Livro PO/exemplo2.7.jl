@@ -1,10 +1,8 @@
 using JuMP
-import GLPK
+import Cbc
 
-modelo = Model(GLPK.Optimizer)
+modelo = Model(Cbc.Optimizer)
 
-d = [100 90 120;
-      40 50 80]
 c = [20 20 30;
      20 20 30]
 l = [2 3;
@@ -22,19 +20,28 @@ l = [2 3;
                     x[2,1] - I[2,1] == 40
                     x[2,2] + I[2,1] - I[2,2] == 70 
                     x[2,3] + I[2,2] == 80
-                    (1.0/4.0)x[1,1] + (1.0/3.0)x[2,1] <= 40
-                    (1.0/4.0)x[1,2] + (1.0/3.0)x[2,2] <= 40
-                    (1.0/4.0)x[1,3] + (1.0/3.0)x[2,3] <= 40
+                    15x[1,1] + 20x[2,1] <= 40*60
+                    15x[1,2] + 20x[2,2] <= 40*60
+                    15x[1,3] + 20x[2,3] <= 40*60
                 end)
 
 optimize!(modelo)
 
 println(modelo)
 
-println("Custo Mínimo: \$ ", objective_value(modelo))
-println("x[1,1] = ", value(x[1,1]))
-println("x[2,1] = ", value(x[1,1]))
-println("x[1,2] = ", value(x[1,2]))
-println("x[2,2] = ", value(x[1,2]))
-println("x[1,3] = ", value(x[1,3]))
-println("x[2,3] = ", value(x[1,3]))
+try 
+    println("Custo Mínimo: \$ ", objective_value(modelo))
+    println("x[1,1] = ", value(x[1,1]))
+    println("x[2,1] = ", value(x[1,1]))
+    println("x[1,2] = ", value(x[1,2]))
+    println("x[2,2] = ", value(x[1,2]))
+    println("x[1,3] = ", value(x[1,3]))
+    println("x[2,3] = ", value(x[1,3]))
+    println("i[1,1] = ", value(I[1,1]))
+    println("i[2,1] = ", value(I[2,1]))
+    println("i[1,2] = ", value(I[1,2]))
+    println("i[2,2] = ", value(I[2,2]))
+catch e 
+    println(e)
+end
+
