@@ -2,8 +2,10 @@ using JuMP
 import Cbc
 
 model = Model(Cbc.Optimizer)
+c = [4 2 5; 11 7 4]
+println(c)
 @variable(model, x[i=1:2, j=1:3] >= 0)
-@objective(model, Min, 4x[1,1] + 11x[2,1] + 2x[1,2] + 7x[2,2] + 5x[1,3] + 4x[2,3])
+@objective(model, Min, sum(c[i,j]*x[i,j] for i in 1:2 for j in 1:3))
 @constraint(model, x[1,1] + x[2,1] == 500)
 @constraint(model, x[1,2] + x[2,2] == 400)
 @constraint(model, x[1,3] + x[2,3] == 900)
