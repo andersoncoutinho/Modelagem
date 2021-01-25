@@ -29,7 +29,7 @@ optimize!(modelo)
 
 println(modelo)
 
-try 
+if(has_values(modelo))
     println("Custo Mínimo: \$ ", objective_value(modelo))
     println("x[1,1] = ", value(x[1,1]))
     println("x[2,1] = ", value(x[1,1]))
@@ -41,7 +41,10 @@ try
     println("i[2,1] = ", value(I[2,1]))
     println("i[1,2] = ", value(I[1,2]))
     println("i[2,2] = ", value(I[2,2]))
-catch e 
-    println(e)
+
+else
+    println("Sem Solução")    
 end
+
+
 
