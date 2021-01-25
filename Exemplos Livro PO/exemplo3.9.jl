@@ -14,7 +14,7 @@ A = [1 1 0 0 1 0;
 @variable(modelo, x[i=1:6], Bin)
 @objective(modelo, Min, sum(c[i]*x[i] for i in 1:n))
 for i in 1:5
-@constraint(modelo, (A * x)[i]  >= 1)
+    @constraint(modelo, (A * x)[i]  >= 1)
 end
 optimize!(modelo)
 
@@ -24,7 +24,7 @@ println("Solução Ótima: ", objective_value(modelo))
 
 for i in 1:6
     if(value(x[i]) == 1)
-    print("x[", i, "] = ")
+        print("x[", i, "] = ")
     end
 end
 println(1)
