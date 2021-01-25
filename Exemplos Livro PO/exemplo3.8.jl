@@ -16,7 +16,7 @@ b = [100 100 100]
 @variable(modelo, x[i=1:3, j=1:8], Bin)
 @objective(modelo, Min, sum(c[i,j]*x[i,j] for i in 1:m for j in 1:n))
 for j in 1:n
-@constraint(modelo, sum(x[i,j] for i in 1:m) == 1)
+    @constraint(modelo, sum(x[i,j] for i in 1:m) == 1)
 end
 
 for i in 1:m
